@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduCraft - Sign In / Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 600px;
+        }
+
+        .auth-form {
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .auth-visual {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .form-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .form-subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e8e8e8;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: #6366f1;
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary:hover {
+            background: #5856eb;
+            transform: translateY(-2px);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+            color: #999;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e8e8e8;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 20px;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e8e8e8;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .social-btn:hover {
+            border-color: #6366f1;
+            transform: translateY(-2px);
+        }
+
+        .form-footer {
+            text-align: center;
+            color: #666;
+        }
+
+        .form-footer a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .visual-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .visual-content p {
+            font-size: 18px;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .visual-icon {
+            font-size: 120px;
+            margin-bottom: 30px;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        .form-toggle {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-toggle button {
+            background: none;
+            border: none;
+            color: #6366f1;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .auth-container {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .auth-visual {
+                display: none;
+            }
+
+            .auth-form {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index-en.html" class="back-link">← Back to Home</a>
+    
+    <div class="auth-container">
+        <div class="auth-form">
+            <div class="logo">EduCraft</div>
+            
+            <!-- Sign-In Form -->
+            <div id="signinForm">
+                <h1 class="form-title">Welcome Back</h1>
+                <p class="form-subtitle">Sign in to your account to continue learning</p>
+                
+                <form>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Sign In</button>
+                </form>
+                
+                <div class="divider">
+                    <span>or continue with</span>
+                </div>
+                
+                <div class="social-login">
+                    <button class="social-btn">
+                        <span>🔵</span> Google
+                    </button>
+                    <button class="social-btn">
+                        <span>📘</span> Facebook
+                    </button>
+                </div>
+                
+                <div class="form-footer">
+                    Don't have an account? 
+                    <button onclick="toggleForm()" style="background: none; border: none; color: #6366f1; font-weight: 500; cursor: pointer; text-decoration: underline;">Sign up</button>
+                </div>
+            </div>
+            
+            <!-- Sign Up Form -->
+            <div id="signupForm" class="hidden">
+                <h1 class="form-title">Create Account</h1>
+                <p class="form-subtitle">Join thousands of learners worldwide</p>
+                
+                <form>
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" name="password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="userRole">I am a:</label>
+                        <select id="userRole" name="role" required style="width: 100%; padding: 15px 20px; border: 2px solid #e8e8e8; border-radius: 12px; font-size: 16px;">
+                            <option value="student">Student - Learn new skills</option>
+                            <option value="instructor">Instructor - Teach others</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Create Account</button>
+                </form>
+                
+                <div class="divider">
+                    <span>or continue with</span>
+                </div>
+                
+                <div class="social-login">
+                    <button class="social-btn">
+                        <span>🔵</span> Google
+                    </button>
+                    <button class="social-btn">
+                        <span>📘</span> Facebook
+                    </button>
+                </div>
+                
+                <div class="form-footer">
+                    Already have an account? 
+                    <button onclick="toggleForm()" style="background: none; border: none; color: #6366f1; font-weight: 500; cursor: pointer; text-decoration: underline;">Sign in</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="auth-visual">
+            <div class="visual-content">
+                <div class="visual-icon">🎓</div>
+                <h2>Start Your Learning Journey</h2>
+                <p>Join over 850,000 students learning with expert instructors on EduCraft. Build skills, advance your career, and achieve your goals.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm() {
+            const signinForm = document.getElementById('signinForm');
+            const signupForm = document.getElementById('signupForm');
+            
+            signinForm.classList.toggle('hidden');
+            signupForm.classList.toggle('hidden');
+        }
+
+        // Check URL parameter for mode
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('mode') === 'signup') {
+            toggleForm();
+        }
+
+        // Handle form submissions
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('form');
+            
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Simulate authentication
+                    const formData = new FormData(this);
+                    const email = formData.get('email');
+                    const role = formData.get('role') || 'student';
+                    
+                    // Store user session (mock)
+                    localStorage.setItem('educraft_user', JSON.stringify({
+                        email: email,
+                        name: formData.get('fullName') || email.split('@')[0],
+                        role: role,
+                        loginTime: new Date().toISOString()
+                    }));
+                    
+                    // Redirect based on role
+                    if (role === 'instructor') {
+                        window.location.href = 'instructor-dashboard.html';
+                    } else {
+                        window.location.href = 'advanced-dashboard.html';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
