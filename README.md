@@ -3,9 +3,8 @@
 A modern, responsive landing page for an online education platform. Built with clean HTML, CSS, and vanilla JavaScript.
 
 ## 👇DEMO LINK:
-``` 
 https://website-course-ux-ui.onrender.com
-```
+
 
 ## 🎯 Features
 
